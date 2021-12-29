@@ -25,7 +25,6 @@ class UserFragment : BaseFragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var usersList: List<UserModel>
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
