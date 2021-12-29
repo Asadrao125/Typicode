@@ -8,6 +8,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp"
+        app:cardMaxElevation="8dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -29,7 +33,7 @@
                     android:padding="10dp"
                     android:text="Close App"
                     android:textColor="@color/white"
-                    android:textSize="10dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -43,10 +47,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
                     android:text="Are you sure you want to exit ?"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,6 +68,7 @@
                             android:id="@+id/btnExit"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
                             android:text="Exit"
                             android:textAllCaps="false" />
 
@@ -79,6 +84,7 @@
                             android:id="@+id/btnClose"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
                             android:text="Close"
                             android:textAllCaps="false" />
 

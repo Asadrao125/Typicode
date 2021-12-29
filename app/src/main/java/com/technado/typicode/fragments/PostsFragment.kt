@@ -37,8 +37,7 @@ class PostsFragment(var name: String) : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_posts, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_posts, container, false)
         recyclerView = binding?.recyclerViewPosts!!
         viewModel = ViewModelProvider(this).get(PostViewModel::class.java)
         commentViewModel = ViewModelProvider(this).get(CommentViewModel::class.java)
