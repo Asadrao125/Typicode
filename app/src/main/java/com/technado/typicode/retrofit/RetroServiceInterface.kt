@@ -9,21 +9,21 @@ import com.technado.typicode.models.PostModel
 import com.technado.typicode.models.ToDoModel
 import com.technado.typicode.models.UserModel
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RetroServiceInterface {
 
     @GET(POSTS)
-    fun getPostsList(): Call<List<PostModel>>
+    fun getPostsList(
+    ): Call<List<PostModel>>
 
     @GET(TODO)
     fun getTodoList(): Call<List<ToDoModel>>
 
     @GET(COMMENTS)
-    fun getCommentsList(): Call<List<CommentModel>>
+    fun getCommentsList(
+        @Query(value = "postId", encoded = true) postId: String,
+    ): Call<List<CommentModel>>
 
     @GET(USERS)
     fun getUsersList(): Call<List<UserModel>>

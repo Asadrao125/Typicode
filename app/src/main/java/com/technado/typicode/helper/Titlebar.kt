@@ -9,8 +9,6 @@ import androidx.databinding.DataBindingUtil
 import com.technado.typicode.activities.HomeActivity
 import com.technado.typicode.R
 import com.technado.typicode.databinding.Titlebarbinding
-import com.technado.typicode.fragments.HelpFragment
-import com.technado.typicode.fragments.HomeFragment
 
 class Titlebar : RelativeLayout {
     var binding: Titlebarbinding? = null
@@ -45,6 +43,16 @@ class Titlebar : RelativeLayout {
     }
 
     fun setTitle(getActivityContext: HomeActivity, title: String) {
+        binding?.rlTitlebarMainLayout?.setVisibility(View.VISIBLE)
+        binding?.tvTitle?.text = title
+        binding?.ivBack?.visibility = View.GONE
+
+        binding?.ivBack?.setOnClickListener {
+            getActivityContext.onBackPressed()
+        }
+    }
+
+    fun setBackTitle(getActivityContext: HomeActivity, title: String) {
         binding?.rlTitlebarMainLayout?.setVisibility(View.VISIBLE)
         binding?.tvTitle?.text = title
         binding?.ivBack?.visibility = View.VISIBLE

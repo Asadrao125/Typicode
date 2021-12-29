@@ -9,25 +9,23 @@ class UserModel(
     var phone: String?,
     var website: String?,
     var company: Company?
-) {
+)
 
-}
+class Company(
+    var name: String?,
+    var catchPhrase: String?,
+    var bs: String?
+)
 
-class Company {
-    var name: String? = null
-    var catchPhrase: String? = null
-    var bs: String? = null
-}
+class Address(
+    var street: String?,
+    var suite: String?,
+    var city: String?,
+    var zipcode: String?,
+    var geo: Geo?
+)
 
-class Address {
-    var street: String? = null
-    var suite: String? = null
-    var city: String? = null
-    var zipcode: String? = null
-    var geo: Geo? = null
-}
-
-class Geo {
-    var lat: String? = null
-    var lng: String? = null
-}
+class Geo(
+    var lat: String?,
+    var lng: String?
+)
