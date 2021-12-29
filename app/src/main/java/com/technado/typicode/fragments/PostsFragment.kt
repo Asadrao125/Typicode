@@ -15,18 +15,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.technado.typicode.R
 import com.technado.typicode.adapters.CommentAdapter
 import com.technado.typicode.adapters.PostAdapter
-import com.technado.typicode.adapters.UserAdapter
 import com.technado.typicode.base.BaseFragment
 import com.technado.typicode.databinding.AboutFragmentBinding
-import com.technado.typicode.dialogFragments.CommentsFragment
 import com.technado.typicode.helper.RecyclerItemClickListener
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.CommentModel
 import com.technado.typicode.models.PostModel
-import com.technado.typicode.models.UserModel
 import com.technado.typicode.viewModels.CommentViewModel
 import com.technado.typicode.viewModels.PostViewModel
-import com.technado.typicode.viewModels.UserViewModel
 
 class PostsFragment(var id: Float) : BaseFragment() {
     var binding: AboutFragmentBinding? = null
@@ -82,10 +78,6 @@ class PostsFragment(var id: Float) : BaseFragment() {
                                 }
                             })
                         commentViewModel.getAllComments()
-
-                        Handler(Looper.getMainLooper()).postDelayed({
-
-                        }, 500)
 
                         dialog.setContentView(view)
                         dialog.show()
