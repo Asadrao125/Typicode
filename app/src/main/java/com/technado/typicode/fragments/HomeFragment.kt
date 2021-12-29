@@ -26,6 +26,6 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun setTitlebar(titlebar: Titlebar) {
-        titlebar.setTitle(getActivityContext!!, "Home")
+        titlebar.setTitle(getActivityContext!!, "Home - All Users")
     }
 }

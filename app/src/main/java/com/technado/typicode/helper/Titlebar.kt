@@ -44,38 +44,10 @@ class Titlebar : RelativeLayout {
         binding?.rlTitlebarMainLayout?.setVisibility(View.GONE)
     }
 
-    fun setBtnLeft(drawable: Int, listener: OnClickListener?) {
-        binding?.ivBack!!.setImageResource(drawable)
-        binding?.ivBack!!.setOnClickListener(listener)
-    }
-
     fun setTitle(getActivityContext: HomeActivity, title: String) {
         binding?.rlTitlebarMainLayout?.setVisibility(View.VISIBLE)
         binding?.tvTitle?.text = title
-        binding?.ivBack?.visibility = View.GONE
-        binding?.ivCart?.visibility = View.GONE
-        binding?.ivHelp?.visibility = View.VISIBLE
-        binding?.ivMenu?.visibility = View.VISIBLE
-
-        binding?.ivMenu?.setOnClickListener {
-            getActivityContext.openDrawer()
-        }
-
-        binding?.ivHelp?.setOnClickListener {
-            getActivityContext.replaceFragment(
-                HelpFragment(),
-                HelpFragment::class.java.simpleName, true, true
-            )
-        }
-    }
-
-    fun setBackTitle(getActivityContext: HomeActivity, title: String) {
-        binding?.rlTitlebarMainLayout?.setVisibility(View.VISIBLE)
-        binding?.tvTitle?.text = title
         binding?.ivBack?.visibility = View.VISIBLE
-        binding?.ivHelp?.visibility = View.GONE
-        binding?.ivMenu?.visibility = View.GONE
-        binding?.ivCart?.visibility = View.GONE
 
         binding?.ivBack?.setOnClickListener {
             getActivityContext.onBackPressed()
