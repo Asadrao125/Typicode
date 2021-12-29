@@ -6,6 +6,8 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -66,6 +68,10 @@ class PostsFragment(var id: Float) : BaseFragment() {
 
                         val recyclerViewComments =
                             view.findViewById<RecyclerView>(R.id.recyclerViewComments)
+
+                        val imgBack = view.findViewById<ImageView>(R.id.imgBack)
+                        val tvComments = view.findViewById<TextView>(R.id.tvComments)
+
                         recyclerViewComments?.layoutManager =
                             LinearLayoutManager(getActivityContext)
                         recyclerViewComments?.setHasFixedSize(true)
@@ -75,9 +81,14 @@ class PostsFragment(var id: Float) : BaseFragment() {
                                 if (it != null) {
                                     recyclerViewComments.adapter =
                                         CommentAdapter(getActivityContext!!, it)
+                                    tvComments.text = "Comments ( ${it.size} )"
                                 }
                             })
                         commentViewModel.getAllComments()
+
+                        imgBack.setOnClickListener(View.OnClickListener {
+                            dialog.dismiss()
+                        })
 
                         dialog.setContentView(view)
                         dialog.show()
@@ -92,6 +103,6 @@ class PostsFragment(var id: Float) : BaseFragment() {
     }
 
     override fun setTitlebar(titlebar: Titlebar) {
-        titlebar.setTitle(getActivityContext!!, "Posts (${id})")
+        titlebar.setBackTitle(getActivityContext!!, "Posts (${id})")
     }
 }
