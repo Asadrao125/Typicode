@@ -14,7 +14,6 @@ import com.technado.typicode.R
 import com.technado.typicode.adapters.UserAdapter
 import com.technado.typicode.base.BaseFragment
 import com.technado.typicode.databinding.HomeFragmentBinding
-import com.technado.typicode.helper.ImageAnimation
 import com.technado.typicode.helper.RecyclerItemClickListener
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.UserModel
