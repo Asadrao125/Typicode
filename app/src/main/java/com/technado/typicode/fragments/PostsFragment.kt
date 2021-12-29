@@ -1,11 +1,15 @@
 package com.technado.typicode.fragments
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
@@ -25,6 +29,7 @@ import com.technado.typicode.models.CommentModel
 import com.technado.typicode.models.PostModel
 import com.technado.typicode.viewModels.CommentViewModel
 import com.technado.typicode.viewModels.PostViewModel
+
 
 class PostsFragment(var name: String) : BaseFragment() {
     var binding: AboutFragmentBinding? = null

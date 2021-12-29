@@ -1,5 +1,6 @@
 package com.technado.typicode.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.technado.typicode.R
 import com.technado.typicode.adapters.UserAdapter
 import com.technado.typicode.base.BaseFragment
 import com.technado.typicode.databinding.HomeFragmentBinding
+import com.technado.typicode.helper.ImageAnimation
 import com.technado.typicode.helper.RecyclerItemClickListener
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.UserModel
@@ -24,6 +26,7 @@ class UserFragment : BaseFragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var usersList: List<UserModel>
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +65,6 @@ class UserFragment : BaseFragment() {
                     }
                 })
         )
-
         return binding?.root
     }
 
