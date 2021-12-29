@@ -19,9 +19,7 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_home)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-
         setMainFrameLayoutID()
-
         replaceFragment(UserFragment(), UserFragment::class.java.simpleName, true, false)
     }
 
@@ -34,9 +32,7 @@ class HomeActivity : BaseActivity() {
             val fragmentManager = supportFragmentManager
             val fragments: List<Fragment> = fragmentManager.fragments
             val last: Fragment = fragments.get(fragments.size - 1)
-
             supportFragmentManager.popBackStack()
-
         } else {
             val exitDialog = ExitDialog()
             exitDialog.show(supportFragmentManager, "exitDialog")
