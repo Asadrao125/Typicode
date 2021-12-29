@@ -50,7 +50,7 @@ class UserFragment : BaseFragment() {
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View?, position: Int) {
                         getActivityContext!!.replaceFragment(
-                            PostsFragment(usersList.get(position).id),
+                            PostsFragment(usersList.get(position).name.toString()),
                             PostsFragment::class.java.simpleName,
                             true,
                             true

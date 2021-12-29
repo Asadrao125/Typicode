@@ -26,7 +26,7 @@ import com.technado.typicode.models.PostModel
 import com.technado.typicode.viewModels.CommentViewModel
 import com.technado.typicode.viewModels.PostViewModel
 
-class PostsFragment(var id: Float) : BaseFragment() {
+class PostsFragment(var name: String) : BaseFragment() {
     var binding: AboutFragmentBinding? = null
     lateinit var viewModel: PostViewModel
     lateinit var recyclerView: RecyclerView
@@ -103,6 +103,6 @@ class PostsFragment(var id: Float) : BaseFragment() {
     }
 
     override fun setTitlebar(titlebar: Titlebar) {
-        titlebar.setBackTitle(getActivityContext!!, "Posts (${id})")
+        titlebar.setBackTitle(getActivityContext!!, "Posts (${name})")
     }
 }
