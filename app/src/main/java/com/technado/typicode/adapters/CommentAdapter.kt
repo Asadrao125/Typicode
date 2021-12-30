@@ -21,7 +21,6 @@ class CommentAdapter(var context: Context, var list: List<CommentModel>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.tvComment.text = list[position].body
-        holder.tvCommentId.text = "ID: ${list[position].postId}"
     }
 
     override fun getItemCount(): Int {
@@ -30,11 +29,9 @@ class CommentAdapter(var context: Context, var list: List<CommentModel>) :
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvComment: TextView
-        var tvCommentId: TextView
 
         init {
             tvComment = itemView.findViewById(R.id.tvComment)
-            tvCommentId = itemView.findViewById(R.id.tvCommentId)
         }
     }
 }

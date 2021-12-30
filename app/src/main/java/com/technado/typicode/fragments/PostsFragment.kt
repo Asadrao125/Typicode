@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -32,6 +33,10 @@ class PostsFragment(var name: String) : BaseFragment() {
     lateinit var postList: List<PostModel>
     lateinit var commentViewModel: CommentViewModel
     lateinit var dialogCustom: Dialog_CustomProgress
+
+    companion object {
+        var postId = "1"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,39 +67,8 @@ class PostsFragment(var name: String) : BaseFragment() {
                 recyclerView,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View?, position: Int) {
-
-                        val dialog = BottomSheetDialog(
-                            getActivityContext!!,
-                            R.style.CustomBottomSheetDialogTheme
-                        )
-                        val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
-
-                        val recyclerViewComments =
-                            view.findViewById<RecyclerView>(R.id.recyclerViewComments)
-
-                        val imgBack = view.findViewById<ImageView>(R.id.imgBack)
-                        val tvComments = view.findViewById<TextView>(R.id.tvComments)
-
-                        recyclerViewComments?.layoutManager =
-                            LinearLayoutManager(getActivityContext)
-                        recyclerViewComments?.setHasFixedSize(true)
-
-                        commentViewModel.getAllComments()
-                            .observe(getActivityContext!!, Observer<List<CommentModel>?> {
-                                if (it != null) {
-                                    recyclerViewComments.adapter =
-                                        CommentAdapter(getActivityContext!!, it)
-                                    tvComments.text = "Comments ( ${it.size} )"
-                                }
-                            })
-                        commentViewModel.getAllComments()
-
-                        imgBack.setOnClickListener(View.OnClickListener {
-                            dialog.dismiss()
-                        })
-
-                        dialog.setContentView(view)
-                        dialog.show()
+                        postId = postList.get(position).id.toString()
+                        showCommentsDialog()
                     }
 
                     override fun onItemLongClick(view: View?, position: Int) {
@@ -103,6 +77,48 @@ class PostsFragment(var name: String) : BaseFragment() {
                 })
         )
         return binding?.root
+    }
+
+    private fun showCommentsDialog() {
+        val dialog = BottomSheetDialog(
+            getActivityContext!!,
+            R.style.CustomBottomSheetDialogTheme
+        )
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+
+        val recyclerViewComments = view.findViewById<RecyclerView>(R.id.recyclerViewComments)
+
+        val imgBack = view.findViewById<ImageView>(R.id.imgBack)
+        val tvComments = view.findViewById<TextView>(R.id.tvComments)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+
+        tvComments.text = "Comments of Post # ${postId}"
+
+        recyclerViewComments?.layoutManager = LinearLayoutManager(getActivityContext)
+        recyclerViewComments?.setHasFixedSize(true)
+
+        progressBar.visibility = View.VISIBLE
+        recyclerViewComments.visibility = View.GONE
+
+        commentViewModel.getAllComments()
+            .observe(getActivityContext!!, Observer<List<CommentModel>?> {
+
+                progressBar.visibility = View.GONE
+                recyclerViewComments.visibility = View.VISIBLE
+
+                if (it != null) {
+                    recyclerViewComments.adapter =
+                        CommentAdapter(getActivityContext!!, it)
+                }
+            })
+        commentViewModel.getAllComments()
+
+        imgBack.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+        })
+
+        dialog.setContentView(view)
+        dialog.show()
     }
 
     override fun setTitlebar(titlebar: Titlebar) {
