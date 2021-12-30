@@ -29,10 +29,10 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
                 call: Call<List<ToDoModel>>?,
                 response: Response<List<ToDoModel>>?
             ) {
-                todoList.postValue(response?.body())
                 if (response?.code() == 200) {
                     todoList.postValue(response.body())
                 } else {
+                    todoList.postValue(null)
                     Toast.makeText(
                         getApplication(),
                         "Oops...!! Something went wrong",
@@ -42,6 +42,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onFailure(call: Call<List<ToDoModel>>?, t: Throwable?) {
+                todoList.postValue(null)
                 Toast.makeText(
                     getApplication(),
                     "Oops...!! Something went wrong",

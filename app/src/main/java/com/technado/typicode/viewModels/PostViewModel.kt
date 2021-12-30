@@ -27,10 +27,10 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 call: Call<List<PostModel>>?,
                 response: Response<List<PostModel>>?
             ) {
-                postsList.postValue(response?.body())
                 if (response?.code() == 200) {
                     postsList.postValue(response.body())
                 } else {
+                    postsList.postValue(null)
                     Toast.makeText(
                         getApplication(),
                         "Oops...!! Something went wrong",
@@ -40,6 +40,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onFailure(call: Call<List<PostModel>>?, t: Throwable?) {
+                postsList.postValue(null)
                 Toast.makeText(
                     getApplication(),
                     "Oops...!! Something went wrong",

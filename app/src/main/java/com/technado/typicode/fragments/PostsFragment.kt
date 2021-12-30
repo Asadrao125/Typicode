@@ -17,6 +17,7 @@ import com.technado.typicode.adapters.CommentAdapter
 import com.technado.typicode.adapters.PostAdapter
 import com.technado.typicode.base.BaseFragment
 import com.technado.typicode.databinding.AboutFragmentBinding
+import com.technado.typicode.helper.Dialog_CustomProgress
 import com.technado.typicode.helper.RecyclerItemClickListener
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.CommentModel
@@ -30,19 +31,24 @@ class PostsFragment(var name: String) : BaseFragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var postList: List<PostModel>
     lateinit var commentViewModel: CommentViewModel
+    lateinit var dialogCustom: Dialog_CustomProgress
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_posts, container, false)
+
+        dialogCustom = Dialog_CustomProgress(getActivityContext!!)
         recyclerView = binding?.recyclerViewPosts!!
         viewModel = ViewModelProvider(this).get(PostViewModel::class.java)
         commentViewModel = ViewModelProvider(this).get(CommentViewModel::class.java)
         recyclerView.layoutManager = LinearLayoutManager(getActivityContext)
         recyclerView.setHasFixedSize(true)
 
+        dialogCustom.showProgressDialog()
         viewModel.getAllPosts().observe(getActivityContext!!, Observer<List<PostModel>?> {
+            dialogCustom.dismissProgressDialog()
             if (it != null) {
                 recyclerView.adapter = PostAdapter(getActivityContext!!, it)
                 postList = it

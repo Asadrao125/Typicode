@@ -13,6 +13,7 @@ import com.technado.typicode.R
 import com.technado.typicode.adapters.UserAdapter
 import com.technado.typicode.base.BaseFragment
 import com.technado.typicode.databinding.HomeFragmentBinding
+import com.technado.typicode.helper.Dialog_CustomProgress
 import com.technado.typicode.helper.RecyclerItemClickListener
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.UserModel
@@ -23,6 +24,7 @@ class UserFragment : BaseFragment() {
     lateinit var viewModel: UserViewModel
     lateinit var recyclerView: RecyclerView
     lateinit var usersList: List<UserModel>
+    lateinit var dialog: Dialog_CustomProgress
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,16 +32,20 @@ class UserFragment : BaseFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
 
+        dialog = Dialog_CustomProgress(getActivityContext!!)
         recyclerView = binding?.recyclerViewUsers!!
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         recyclerView.layoutManager = LinearLayoutManager(getActivityContext)
         recyclerView.setHasFixedSize(true)
 
+        dialog.showProgressDialog()
         viewModel.getAllUsers().observe(getActivityContext!!, Observer<List<UserModel>?> {
+            dialog.dismissProgressDialog()
             if (it != null) {
                 recyclerView.adapter = UserAdapter(getActivityContext!!, it)
                 usersList = it
             }
+            dialog.dismissProgressDialog()
         })
         viewModel.getAllUsers()
 

@@ -29,6 +29,7 @@ class PhotosViewModel(application: Application) : AndroidViewModel(application) 
                 if (response?.code() == 200) {
                     photosList.postValue(response.body())
                 } else {
+                    photosList.postValue(null)
                     Toast.makeText(
                         getApplication(),
                         "Oops...!! Something went wrong",
@@ -38,6 +39,7 @@ class PhotosViewModel(application: Application) : AndroidViewModel(application) 
             }
 
             override fun onFailure(call: Call<List<PhotosModel>>?, t: Throwable?) {
+                photosList.postValue(null)
                 Toast.makeText(
                     getApplication(),
                     "Oops...!! Something went wrong",

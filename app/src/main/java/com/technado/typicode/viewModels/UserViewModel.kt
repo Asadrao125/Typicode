@@ -4,6 +4,7 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.technado.typicode.helper.Dialog_CustomProgress
 import com.technado.typicode.models.UserModel
 import com.technado.typicode.retrofit.RetroInstance
 import com.technado.typicode.retrofit.RetroServiceInterface
@@ -26,10 +27,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                 call: Call<List<UserModel>>?,
                 response: Response<List<UserModel>>?
             ) {
-                usersList.postValue(response?.body())
                 if (response?.code() == 200) {
                     usersList.postValue(response.body())
                 } else {
+                    usersList.postValue(null)
                     Toast.makeText(
                         getApplication(),
                         "Oops...!! Something went wrong",
@@ -39,6 +40,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onFailure(call: Call<List<UserModel>>?, t: Throwable?) {
+                usersList.postValue(null)
                 Toast.makeText(
                     getApplication(),
                     "Oops...!! Something went wrong",

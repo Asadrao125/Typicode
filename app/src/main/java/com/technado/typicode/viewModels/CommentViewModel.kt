@@ -28,10 +28,10 @@ class CommentViewModel(application: Application) : AndroidViewModel(application)
                 call: Call<List<CommentModel>>?,
                 response: Response<List<CommentModel>>?
             ) {
-                postsList.postValue(response?.body())
                 if (response?.code() == 200) {
                     postsList.postValue(response.body())
                 } else {
+                    postsList.postValue(null)
                     Toast.makeText(
                         getApplication(),
                         "Oops...!! Something went wrong",
@@ -41,6 +41,7 @@ class CommentViewModel(application: Application) : AndroidViewModel(application)
             }
 
             override fun onFailure(call: Call<List<CommentModel>>?, t: Throwable?) {
+                postsList.postValue(null)
                 Toast.makeText(
                     getApplication(),
                     "Oops...!! Something went wrong",

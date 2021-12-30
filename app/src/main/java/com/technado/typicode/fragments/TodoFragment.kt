@@ -16,6 +16,7 @@ import com.technado.typicode.adapters.UserAdapter
 import com.technado.typicode.base.BaseFragment
 import com.technado.typicode.databinding.HomeFragmentBinding
 import com.technado.typicode.databinding.TodoFragmentBinding
+import com.technado.typicode.helper.Dialog_CustomProgress
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.ToDoModel
 import com.technado.typicode.models.UserModel
@@ -26,6 +27,7 @@ class TodoFragment : BaseFragment() {
     var binding: TodoFragmentBinding? = null
     lateinit var recyclerViewTodo: RecyclerView
     lateinit var viewModel: TodoViewModel
+    lateinit var dialog: Dialog_CustomProgress
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,12 +35,15 @@ class TodoFragment : BaseFragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_todo, container, false)
 
+        dialog = Dialog_CustomProgress(getActivityContext!!)
         recyclerViewTodo = binding?.recyclerViewTodo!!
         viewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
         recyclerViewTodo.layoutManager = LinearLayoutManager(getActivityContext)
         recyclerViewTodo.setHasFixedSize(true)
 
+        dialog.showProgressDialog()
         viewModel.getToDoList().observe(getActivityContext!!, Observer<List<ToDoModel>?> {
+            dialog.dismissProgressDialog()
             if (it != null) {
                 recyclerViewTodo.adapter = TodoAdapter(getActivityContext!!, it)
             }
