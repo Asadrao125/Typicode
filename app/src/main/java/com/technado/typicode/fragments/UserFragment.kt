@@ -62,6 +62,24 @@ class UserFragment : BaseFragment() {
                     }
                 })
         )
+
+        binding?.btnTodoList?.setOnClickListener(View.OnClickListener {
+            getActivityContext!!.replaceFragment(
+                TodoFragment(),
+                TodoFragment::class.java.simpleName,
+                true,
+                false
+            )
+        })
+
+        binding?.btnPhotos?.setOnClickListener(View.OnClickListener {
+            getActivityContext!!.replaceFragment(
+                PhotosFragment(),
+                PhotosFragment::class.java.simpleName,
+                true,
+                false
+            )
+        })
         return binding?.root
     }
 

@@ -1,13 +1,11 @@
 package com.technado.typicode.retrofit
 
 import com.technado.typicode.helper.Constants.Companion.COMMENTS
+import com.technado.typicode.helper.Constants.Companion.PHOTOS
 import com.technado.typicode.helper.Constants.Companion.POSTS
 import com.technado.typicode.helper.Constants.Companion.TODO
 import com.technado.typicode.helper.Constants.Companion.USERS
-import com.technado.typicode.models.CommentModel
-import com.technado.typicode.models.PostModel
-import com.technado.typicode.models.ToDoModel
-import com.technado.typicode.models.UserModel
+import com.technado.typicode.models.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -27,5 +25,8 @@ interface RetroServiceInterface {
 
     @GET(USERS)
     fun getUsersList(): Call<List<UserModel>>
+
+    @GET(PHOTOS)
+    fun getPhotos(): Call<List<PhotosModel>>
 
 }
