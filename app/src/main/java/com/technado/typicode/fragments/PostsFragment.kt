@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -72,7 +73,11 @@ class PostsFragment(var name: String) : BaseFragment() {
                     }
 
                     override fun onItemLongClick(view: View?, position: Int) {
-
+                        Toast.makeText(
+                            getActivityContext,
+                            "" + postList.get(position).id.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 })
         )
