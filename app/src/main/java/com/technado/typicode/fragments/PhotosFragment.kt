@@ -14,6 +14,7 @@ import com.technado.typicode.adapters.PhotosAdapter
 import com.technado.typicode.base.BaseFragment
 import com.technado.typicode.databinding.PhotosFragmentBinding
 import com.technado.typicode.helper.Dialog_CustomProgress
+import com.technado.typicode.helper.RecyclerItemClickListener
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.PhotosModel
 import com.technado.typicode.viewModels.PhotosViewModel
@@ -23,6 +24,7 @@ class PhotosFragment : BaseFragment() {
     lateinit var viewModel: PhotosViewModel
     lateinit var recyclerView: RecyclerView
     lateinit var dialog: Dialog_CustomProgress
+    lateinit var photosList: List<PhotosModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +42,34 @@ class PhotosFragment : BaseFragment() {
         viewModel.getAllPictures().observe(getActivityContext!!, Observer<List<PhotosModel>?> {
             dialog.dismissProgressDialog()
             if (it != null) {
+                photosList = it
                 recyclerView.adapter = PhotosAdapter(getActivityContext!!, it)
             }
         })
         viewModel.getAllPictures()
+
+        recyclerView.addOnItemTouchListener(
+            RecyclerItemClickListener(
+                getActivityContext,
+                recyclerView,
+                object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View?, position: Int) {
+                        PostsFragment.postId = photosList.get(position).id.toString()
+                        val url: String = photosList.get(position).url
+                        getActivityContext!!.replaceFragment(
+                            ImageViewFragment(url),
+                            ImageViewFragment::class.java.simpleName,
+                            true,
+                            false
+                        )
+                    }
+
+                    override fun onItemLongClick(view: View?, position: Int) {
+
+                    }
+                })
+        )
+
         return binding!!.root
     }
 
