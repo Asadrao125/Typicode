@@ -1,5 +1,6 @@
 package com.technado.typicode.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.technado.typicode.R
 import com.technado.typicode.adapters.UserAdapter
 import com.technado.typicode.base.BaseFragment
@@ -18,6 +20,7 @@ import com.technado.typicode.helper.RecyclerItemClickListener
 import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.UserModel
 import com.technado.typicode.viewModels.UserViewModel
+
 
 class UserFragment : BaseFragment() {
     var binding: HomeFragmentBinding? = null
@@ -38,9 +41,16 @@ class UserFragment : BaseFragment() {
         recyclerView.layoutManager = LinearLayoutManager(getActivityContext)
         recyclerView.setHasFixedSize(true)
 
+        val pDialog = SweetAlertDialog(getActivityContext, SweetAlertDialog.SUCCESS_TYPE)
+        pDialog.progressHelper.barColor = Color.parseColor("#000000")
+        pDialog.titleText = "Loading..."
+        pDialog.setCancelable(false)
+        //pDialog.show()
+
         dialog.showProgressDialog()
         viewModel.getAllUsers().observe(getActivityContext!!, Observer<List<UserModel>?> {
             dialog.dismissProgressDialog()
+            //pDialog.dismiss()
             if (it != null) {
                 recyclerView.adapter = UserAdapter(getActivityContext!!, it)
                 usersList = it
