@@ -21,7 +21,6 @@ import com.technado.typicode.helper.Titlebar
 import com.technado.typicode.models.UserModel
 import com.technado.typicode.viewModels.UserViewModel
 
-
 class UserFragment : BaseFragment() {
     var binding: HomeFragmentBinding? = null
     lateinit var viewModel: UserViewModel

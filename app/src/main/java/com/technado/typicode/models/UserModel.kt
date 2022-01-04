@@ -11,11 +11,7 @@ class UserModel(
     var company: Company?
 )
 
-class Company(
-    var name: String?,
-    var catchPhrase: String?,
-    var bs: String?
-)
+class Company(var name: String?, var catchPhrase: String?, var bs: String?)
 
 class Address(
     var street: String?,
@@ -25,7 +21,4 @@ class Address(
     var geo: Geo?
 )
 
-class Geo(
-    var lat: String?,
-    var lng: String?
-)
+class Geo(var lat: String?, var lng: String?)
