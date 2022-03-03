@@ -25,7 +25,6 @@ class PostAdapter(var context: Context, var list: List<PostModel>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         binding?.tvTitle?.text = list[position].body
-
         binding?.tvComments?.setOnClickListener(View.OnClickListener {
 
         })
